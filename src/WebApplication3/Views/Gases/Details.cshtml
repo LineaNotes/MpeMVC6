@@ -1,0 +1,78 @@
+@model WebApplication3.Models.Gas
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Gas</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.datum)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.datum)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.koncno_stanje)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.koncno_stanje)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.koncno_stanje_cela)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.koncno_stanje_cela)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.koncno_stanje_cifra)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.koncno_stanje_cifra)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.proizvedena_kolicina)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.proizvedena_kolicina)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ura_koncnega_vpisa)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ura_koncnega_vpisa)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ura_zacetnega_vpisa)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ura_zacetnega_vpisa)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.zacetno_stanje)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.zacetno_stanje)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.zacetno_stanje_cela)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.zacetno_stanje_cela)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.zacetno_stanje_cifra)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.zacetno_stanje_cifra)
+        </dd>
+    </dl>
+</div>
+<p>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</p>

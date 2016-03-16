@@ -1,0 +1,86 @@
+@model IEnumerable<WebApplication3.Models.Gas>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.datum)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.koncno_stanje)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.koncno_stanje_cela)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.koncno_stanje_cifra)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.proizvedena_kolicina)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ura_koncnega_vpisa)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ura_zacetnega_vpisa)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.zacetno_stanje)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.zacetno_stanje_cela)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.zacetno_stanje_cifra)
+        </th>
+        <th></th>
+    </tr>
+    
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.datum)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.koncno_stanje)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.koncno_stanje_cela)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.koncno_stanje_cifra)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.proizvedena_kolicina)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ura_koncnega_vpisa)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ura_zacetnega_vpisa)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.zacetno_stanje)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.zacetno_stanje_cela)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.zacetno_stanje_cifra)
+        </td>
+        <td>
+            <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+            <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+            <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+        </td>
+    </tr>
+}
+</table>
