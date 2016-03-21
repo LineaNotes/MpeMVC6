@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Newtonsoft.Json;
+using Microsoft.Data.Entity;
 
 namespace WebApplication3.Models
 {
@@ -30,10 +32,10 @@ namespace WebApplication3.Models
 			}
 
 			// seed Gases
-			//if (SeedGases()) return;
+			if (SeedGases()) return;
 
 			// seed GasPrices
-			//if (SeedGasPrices()) return;
+			if (SeedGasPrices()) return;
 
 			// seed Users
 			await SeedUsersRoles();
@@ -102,16 +104,18 @@ namespace WebApplication3.Models
 
 		private bool SeedGases()
 		{
+			//_context.Database.ExecuteSqlCommand("TRUNCATE TABLE dbo.Gas");
 			if (_context.Gases.Any())
 			{
 				return true;
 			}
+			string jsonString = File.ReadAllText(@"files\gas.json");
+
+			Gas[] gasArray = JsonConvert.DeserializeObject<Gas[]>(jsonString);
+
+			foreach (var gas in gasArray)
 			{
-				string jsonString = File.ReadAllText(@"files\gas.json");
-
-				Gas[] gasArray = JsonConvert.DeserializeObject<Gas[]>(jsonString);
-				_context.Gases.AddRange(gasArray);
-
+				_context.Gases.Add(gas);
 				_context.SaveChanges();
 			}
 			return false;

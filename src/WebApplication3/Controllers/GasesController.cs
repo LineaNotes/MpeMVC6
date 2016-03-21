@@ -6,7 +6,7 @@ namespace WebApplication3.Controllers
 {
 	public class GasesController : Controller
 	{
-		private ApplicationDbContext _context;
+		private readonly ApplicationDbContext _context;
 
 		public GasesController(ApplicationDbContext context)
 		{
