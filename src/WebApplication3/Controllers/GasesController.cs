@@ -1,10 +1,16 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using Microsoft.AspNet.Authorization;
 using Microsoft.AspNet.Mvc;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using WebApplication3.Models;
+using WebApplication3.Services;
 
 namespace WebApplication3.Controllers
 {
+	[Authorize]
 	public class GasesController : Controller
 	{
 		private readonly ApplicationDbContext _context;
@@ -137,6 +143,30 @@ namespace WebApplication3.Controllers
 		public IActionResult Graphs()
 		{
 			return View();
+		}
+
+		public string GetJsonHola()
+		{
+			var selection = (from g in _context.Gases select new { g.datum, g.proizvedena_kolicina }).ToArray();
+			var list =
+				selection.Select(g => new GasSelection { Datum = Conversion.getTime(g.datum), Proizvod = g.proizvedena_kolicina })
+					.ToArray();
+
+			object[,] dataFill = new object[list.Length, 2];
+			for (int i = 0; i < list.Length; i++)
+			{
+				dataFill[i, 0] = list[i].Datum;
+				dataFill[i, 1] = list[i].Proizvod;
+			}
+
+			string sArraySerializedIndented = JsonConvert.SerializeObject(dataFill, Formatting.Indented);
+			return sArraySerializedIndented;
+		}
+
+		private class GasSelection
+		{
+			public long Datum { get; set; }
+			public float Proizvod { get; set; }
 		}
 	}
 }

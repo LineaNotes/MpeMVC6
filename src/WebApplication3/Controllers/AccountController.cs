@@ -93,7 +93,7 @@ namespace WebApplication3.Controllers
 		//
 		// GET: /Account/Register
 		[HttpGet]
-		[AllowAnonymous]
+		[Authorize(Roles = "administrator")]
 		public IActionResult Register()
 		{
 			return View();
