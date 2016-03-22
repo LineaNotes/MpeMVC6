@@ -1,86 +1,75 @@
 @model IEnumerable<WebApplication3.Models.Gas>
 
 @{
-    ViewData["Title"] = "Index";
+	ViewData["Title"] = "Poizvedbe";
 }
 
-<h2>Index</h2>
+<article class="row body-content">
+	<div class="col-sm-3">
+		<h3>Tabela vnosov</h3>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.datum)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.koncno_stanje)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.koncno_stanje_cela)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.koncno_stanje_cifra)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.proizvedena_kolicina)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ura_koncnega_vpisa)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ura_zacetnega_vpisa)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.zacetno_stanje)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.zacetno_stanje_cela)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.zacetno_stanje_cifra)
-        </th>
-        <th></th>
-    </tr>
-    
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.datum)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.koncno_stanje)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.koncno_stanje_cela)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.koncno_stanje_cifra)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.proizvedena_kolicina)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ura_koncnega_vpisa)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ura_zacetnega_vpisa)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.zacetno_stanje)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.zacetno_stanje_cela)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.zacetno_stanje_cifra)
-        </td>
-        <td>
-            <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-            <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-            <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-        </td>
-    </tr>
-}
-</table>
+		<form asp-controller="Gases" asp-action="Index" method="get" class="form-horizontal body-content" role="form">
+			<div class="form-group form-inline">
+				<label for="startDate" class="control-label">Od</label>
+				<input type="date" id="startDate" name="StartDate" placeholder="dd.mm.llll" class="form-control" required>
+			</div>
+			<div class="form-group form-inline">
+				<label for="endDate" class="control-label">Do</label>
+				<input type="date" id="endDate" name="EndDate" placeholder="dd.mm.llll" class="form-control">
+			</div>
+			<div class="form-group">
+				<input name="test" type="submit" value="I&#353;&#269;i"/>
+			</div>
+			@{
+				if (ViewBag.Message != null)
+				{
+					<div class="form-group text-danger">
+						<span>@ViewBag.Message</span>
+					</div>
+				}
+				<div class="form-group">
+					<label class="control-label">SUMMA</label>
+					<span>@ViewBag.Summa</span>
+				</div>
+			}
+		</form>
+	</div>
+
+
+	<div class="article-content col-sm-9">
+		<table class="table table-responsive table-striped">
+			<tr>
+				<th>
+					@Html.DisplayNameFor(model => model.datum)
+				</th>
+				<th>
+					@Html.DisplayNameFor(model => model.proizvedena_kolicina)
+				</th>
+				<th>
+					@Html.DisplayNameFor(model => model.ura_zacetnega_vpisa)
+				</th>
+				<th>
+					@Html.DisplayNameFor(model => model.ura_koncnega_vpisa)
+				</th>
+			</tr>
+
+			@foreach (var item in Model)
+			{
+				<tr>
+					<td>
+						@Html.DisplayFor(modelItem => item.datum)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.proizvedena_kolicina)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.ura_zacetnega_vpisa)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.ura_koncnega_vpisa)
+					</td>
+				</tr>
+			}
+		</table>
+	</div>
+</article>

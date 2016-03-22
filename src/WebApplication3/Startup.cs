@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Globalization;
+using System.Threading.Tasks;
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Hosting;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -8,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using WebApplication3.Models;
 using WebApplication3.Services;
+using Microsoft.AspNet.Localization;
 
 namespace WebApplication3
 {
@@ -45,7 +48,9 @@ namespace WebApplication3
 				.AddEntityFrameworkStores<ApplicationDbContext>()
 				.AddDefaultTokenProviders();
 
-			services.AddMvc();
+			services.AddMvc()
+				.AddViewLocalization()
+				.AddDataAnnotationsLocalization();
 
 			services.AddTransient<GasContextSeedData>();
 			//services.AddScoped<IGasRepository, GasRepository>();
@@ -61,6 +66,27 @@ namespace WebApplication3
 		{
 			loggerFactory.AddConsole(Configuration.GetSection("Logging"));
 			loggerFactory.AddDebug();
+
+			// Configure the Localization middleware
+			var requestLocalizationOptions = new RequestLocalizationOptions
+			{
+				SupportedCultures = new List<CultureInfo>
+				{
+					new CultureInfo("en-IE")
+				},
+				SupportedUICultures = new List<CultureInfo>
+				{
+					new CultureInfo("en-IE")
+					//, new CultureInfo("sl-SI")
+				},
+				RequestCultureProviders = new List<IRequestCultureProvider>
+				{
+					new CustomRequestCultureProvider(httpContext => Task.FromResult(new ProviderCultureResult("en-IE"))),
+					new AcceptLanguageHeaderRequestCultureProvider()
+				}
+			};
+
+			app.UseRequestLocalization(requestLocalizationOptions, new RequestCulture("en-IE"));
 
 			if (env.IsDevelopment())
 			{
@@ -102,7 +128,7 @@ namespace WebApplication3
 					template: "{controller=Home}/{action=Index}/{id?}");
 			});
 
-			await seeder.EnsureSeedDataAsync();
+			//await seeder.EnsureSeedDataAsync();
 		}
 
 		// Entry point for the application.

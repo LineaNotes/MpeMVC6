@@ -8,7 +8,7 @@
 				<a asp-controller="Gases" asp-action="Index">Poizvedbe</a>
 			</li>
 			<li>
-				<a asp-controller="App" asp-action="Index">Grafi</a>
+				<a asp-controller="Gases" asp-action="Graphs">Grafi</a>
 			</li>
 			<li>
 				<a asp-controller="GasPrices" asp-action="Index">Vnos cene</a>
@@ -17,13 +17,13 @@
 				<a asp-controller="Auth" asp-action="Index">Admin</a>
 			</li>
 			<li>
-				<a asp-controller="Account" asp-action="Register">Register</a>
+				<a asp-controller="Account" asp-action="Register">Registracija</a>
 			</li>
 			<li>
-				<a asp-controller="Manage" asp-action="Index" title="Manage">Hello @User.GetUserName()!</a>
+				<a asp-controller="Manage" asp-action="Index" title="Manage">Pozdravljen @User.GetUserName()!</a>
 			</li>
 			<li>
-				<button type="submit" class="btn btn-link navbar-btn navbar-link">Log off</button>
+				<button type="submit" class="btn btn-link navbar-btn navbar-link">Odjava</button>
 			</li>
 		</ul>
 	</form>
@@ -32,7 +32,7 @@ else
 {
 	<ul class="nav navbar-nav navbar-right">
 		<li>
-			<a asp-controller="Account" asp-action="Login">Log in</a>
+			<a asp-controller="Account" asp-action="Login">Prijava</a>
 		</li>
 	</ul>
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using Microsoft.AspNet.Mvc;
 using WebApplication3.Models;
@@ -14,9 +15,26 @@ namespace WebApplication3.Controllers
 		}
 
 		// GET: Gases
-		public IActionResult Index()
+		public IActionResult Index(DateTime startDate, DateTime endDate, string test)
 		{
-			return View(_context.Gases.ToList());
+			var gases = from g in _context.Gases select g;
+			var result = "";
+
+			gases = startDate > endDate
+				? gases.Where(g => g.datum == startDate)
+				: gases.Where(g => g.datum >= startDate && g.datum <= endDate);
+
+			if (!gases.Any() && !string.IsNullOrEmpty(test))
+			{
+				result = "Za izbran razpon ni vnosa";
+			}
+
+			ViewBag.Message = result;
+
+			var sum = gases.AsEnumerable().Sum(p => p.proizvedena_kolicina);
+			ViewBag.Summa = sum;
+
+			return View(gases);
 		}
 
 		// GET: Gases/Details/5
@@ -113,6 +131,12 @@ namespace WebApplication3.Controllers
 			_context.Gases.Remove(gas);
 			_context.SaveChanges();
 			return RedirectToAction("Index");
+		}
+
+		// GET: Gases/Graphs
+		public IActionResult Graphs()
+		{
+			return View();
 		}
 	}
 }
