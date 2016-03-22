@@ -35,6 +35,12 @@ namespace WebApplication3.Controllers
 			_logger = loggerFactory.CreateLogger<AccountController>();
 		}
 
+		// GET: /Account/AccessDenied
+		public IActionResult AccessDenied()
+		{
+			return View();
+		}
+
 		//
 		// GET: /Account/Login
 		[HttpGet]

@@ -1,34 +1,37 @@
 @model WebApplication3.Models.GasPrice
 
 @{
-    ViewData["Title"] = "Delete";
+	ViewData["Title"] = "Bri&#353;i";
 }
 
-<h2>Delete</h2>
+<article class="row body-content">
+	<div class="col-sm-offset-3 col-sm-6">
+		<h3>Izbris vnosa cene</h3>
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>GasPrice</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.GDate)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.GDate)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.GPrice)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.GPrice)
-        </dd>
-    </dl>
-    
-    <form asp-action="Delete">
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            <a asp-action="Index">Back to List</a>
-        </div>
-    </form>
-</div>
+		<div>
+			<h4>Si prepri&#269;an da &#382;eli&#353; izbrisati?</h4>
+			<hr/>
+			<dl class="dl-horizontal">
+				<dt>
+					@Html.DisplayNameFor(model => model.GDate)
+				</dt>
+				<dd>
+					@Html.DisplayFor(model => model.GDate)
+				</dd>
+				<dt>
+					@Html.DisplayNameFor(model => model.GPrice)
+				</dt>
+				<dd>
+					@Html.DisplayFor(model => model.GPrice)
+				</dd>
+			</dl>
+
+			<form asp-action="Delete">
+				<div class="form-actions no-color">
+					<input type="submit" value="Izbri&#353;i" class="btn btn-default"/> |
+					<a asp-action="Index">Nazaj na seznam</a>
+				</div>
+			</form>
+		</div>
+	</div>
+</article>

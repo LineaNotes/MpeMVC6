@@ -1,38 +1,43 @@
 @model IEnumerable<WebApplication3.Models.GasPrice>
 
 @{
-    ViewData["Title"] = "Index";
+	ViewData["Title"] = "Index";
 }
 
-<h2>Index</h2>
+<article class="row body-content">
+	<div class="col-sm-offset-3 col-sm-6">
+		<h2>Vnos cene</h2>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.GDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.GPrice)
-        </th>
-        <th></th>
-    </tr>
-    
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.GDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.GPrice)
-        </td>
-        <td>
-            <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-            <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-            <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-        </td>
-    </tr>
-}
-</table>
+		<p>
+			<a asp-action="Create">Nov vnos</a>
+		</p>
+		<table class="table table-responsive table-striped">
+			<tr>
+				<th>
+					@Html.DisplayNameFor(model => model.GDate)
+				</th>
+				<th>
+					@Html.DisplayNameFor(model => model.GPrice)
+				</th>
+				<th></th>
+			</tr>
+
+			@foreach (var item in Model)
+			{
+				<tr>
+					<td>
+						@Html.DisplayFor(modelItem => item.GDate)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.GPrice)
+					</td>
+					<td>
+						<a asp-action="Edit" asp-route-id="@item.Id">Uredi</a> |
+						<a asp-action="Details" asp-route-id="@item.Id">Podrobno</a> |
+						<a asp-action="Delete" asp-route-id="@item.Id">Bri&#353;i</a>
+					</td>
+				</tr>
+			}
+		</table>
+	</div>
+</article>

@@ -1,44 +1,48 @@
 @model WebApplication3.Models.GasPrice
 
 @{
-    ViewData["Title"] = "Create";
+	ViewData["Title"] = "Vnesi";
 }
 
-<h2>Create</h2>
+<article class="row body-content">
+	<div class="col-sm-offset-3 col-sm-6">
+		<h3>Nov vnos</h3>
 
-<form asp-action="Create">
-    <div class="form-horizontal">
-        <h4>GasPrice</h4>
-        <hr />
-        <div asp-validation-summary="ValidationSummary.ModelOnly" class="text-danger"></div>
-        <div class="form-group">
-            <label asp-for="GDate" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="GDate" class="form-control" />
-                <span asp-validation-for="GDate" class="text-danger" />
-            </div>
-        </div>
-        <div class="form-group">
-            <label asp-for="GPrice" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="GPrice" class="form-control" />
-                <span asp-validation-for="GPrice" class="text-danger" />
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </div>
-    </div>
-</form>
+		<form asp-action="Create">
+			<div class="form-horizontal">
+				<h4>Vnesi ceno in datum</h4>
+				<hr/>
+				<div asp-validation-summary="ValidationSummary.ModelOnly" class="text-danger"></div>
+				<div class="form-group">
+					<label asp-for="GDate" class="col-md-2 control-label"></label>
+					<div class="col-md-10">
+						<input asp-for="GDate" class="form-control"/>
+						<span asp-validation-for="GDate" class="text-danger" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label asp-for="GPrice" class="col-md-2 control-label"></label>
+					<div class="col-md-10">
+						<input asp-for="GPrice" class="form-control"/>
+						<span asp-validation-for="GPrice" class="text-danger" />
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-md-offset-2 col-md-10">
+						<input type="submit" value="Potrdi" class="btn btn-default"/>
+					</div>
+				</div>
+			</div>
+		</form>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+		<div>
+			<a asp-action="Index">Nazaj na seznam</a>
+		</div>
+	</div>
+</article>
 
 @section Scripts {
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
-    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+	<script src="~/lib/jquery/dist/jquery.min.js"></script>
+	<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+	<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
 }
