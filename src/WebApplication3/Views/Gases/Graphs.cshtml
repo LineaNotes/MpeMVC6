@@ -2,54 +2,13 @@
 	ViewData["Title"] = "Grafi";
 }
 
-<article id="contain" class="row body-content">
+<article id="contain" class="row body-content article-content"></article>
 
-</article>
+<article id="contain1" class="row body-content article-content"></article>
 
 <script src="~/lib/jquery/dist/jquery.js"></script>
 <script src="~/lib/highstock/highstock.js"></script>
 <script src="~/lib/highstock/modules/exporting.js"></script>
+<script src="~/js/graphProduction.js"></script>
+<script src="~/js/graphUtilization.js"></script>
 
-<script>
-	$(function() {
-
-		$.getJSON("/Gases/GetJsonHola", function(data) {
-			// Create the chart
-			var chart = new Highcharts.StockChart({
-				rangeSelector: {
-					selected: 1
-				},
-
-				chart: {
-					type: 'column',
-					renderTo: 'contain'
-				},
-				title: {
-					text: 'Poraba energenta'
-				},
-
-				series: [
-					{
-						name: 'AAPL',
-						data: data,
-						tooltip: {
-							valueDecimals: 2
-						}
-					}
-				]
-			});
-		});
-
-	});
-</script>
-
-
-<p id="rData1">
-</p>
-
-<script type="text/jscript">
-				var url = "/Gases/GetJsonHola";
-				$.get(url, null, function (data) {
-								$("#rDat1a").html(data);
-				});
-</script>

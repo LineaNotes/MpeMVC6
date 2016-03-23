@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using WebApplication3.Models;
 using WebApplication3.Services;
+using Newtonsoft.Json.Serialization;
 
 namespace WebApplication3.Controllers
 {
@@ -145,7 +146,7 @@ namespace WebApplication3.Controllers
 			return View();
 		}
 
-		public string GetJsonHola()
+		public string GetAllGasesDateOutput()
 		{
 			var selection = (from g in _context.Gases select new { g.datum, g.proizvedena_kolicina }).ToArray();
 			var list =
@@ -168,5 +169,45 @@ namespace WebApplication3.Controllers
 			public long Datum { get; set; }
 			public float Proizvod { get; set; }
 		}
+
+		public string GetUtilization()
+		{
+			var selection = (from g in _context.Gases select new { g.ura_zacetnega_vpisa, g.ura_koncnega_vpisa }).ToArray();
+			var count = selection.Count();
+
+			var result = new TimeSpan[count];
+			var totalMin = 0f;
+
+			for (int i = 0; i < count; i++)
+			{
+				result[i] = selection[i].ura_koncnega_vpisa.Subtract(selection[i].ura_zacetnega_vpisa);
+				totalMin += (float)result[i].TotalMinutes;
+			}
+
+			var totalPercentage = (totalMin /(count * 1440)) * 100;
+
+			object[] obj = new object[2];
+
+			GasUtil gas = new GasUtil();
+			gas.Name = "V uporabi";
+			gas.Y = totalPercentage;
+
+			GasUtil gasN = new GasUtil();
+			gasN.Name = "V mirovanju";
+			gasN.Y = 100f - gas.Y;  
+
+			obj[0] = gas;
+			obj[1] = gasN;
+
+			string sArrIndented = JsonConvert.SerializeObject(obj, Formatting.Indented, new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver()});
+
+			return sArrIndented;
+		}
+
+		private class GasUtil {
+			public string Name { get; set; }
+			public float Y { get; set; }
+		}
+
 	}
 }
