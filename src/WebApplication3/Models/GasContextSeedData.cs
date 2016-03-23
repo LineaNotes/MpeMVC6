@@ -32,10 +32,10 @@ namespace WebApplication3.Models
 			}
 
 			// seed Gases
-			if (SeedGases()) return;
+			//if (SeedGases()) return;
 
 			// seed GasPrices
-			if (SeedGasPrices()) return;
+			//if (SeedGasPrices()) return;
 
 			// seed Users
 			await SeedUsersRoles();
@@ -54,37 +54,31 @@ namespace WebApplication3.Models
 			}
 
 			await _roleManager.CreateAsync(new IdentityRole("administrator"));
-
 			var newUser = new ApplicationUser()
 			{
 				UserName = "test1@test.si",
 				Email = "test1@test.si"
 			};
-
 			await _userManager.CreateAsync(newUser, "P@ssw0rd!");
 			await _userManager.AddToRoleAsync(newUser, "administrator");
 
 			await _roleManager.CreateAsync(new IdentityRole("upravnik"));
-
 			var newUser1 = new ApplicationUser()
 			{
 				UserName = "test2@test.si",
 				Email = "test2@test.si"
 			};
-
-			await _userManager.CreateAsync(newUser1, "!P@ssw0rd");
-			await _userManager.AddToRoleAsync(newUser, "upravnik");
+			await _userManager.CreateAsync(newUser1, "P@ssw0rd!");
+			await _userManager.AddToRoleAsync(newUser1, "upravnik");
 
 			await _roleManager.CreateAsync(new IdentityRole("tajnik"));
-
 			var newUser2 = new ApplicationUser()
 			{
 				UserName = "test3@test.si",
 				Email = "test3@test.si",
 			};
-
-			await _userManager.CreateAsync(newUser2, "!P@ssw0rd");
-			await _userManager.AddToRoleAsync(newUser, "tajnik");
+			await _userManager.CreateAsync(newUser2, "P@ssw0rd!");
+			await _userManager.AddToRoleAsync(newUser2, "tajnik");
 		}
 
 		private bool SeedGasPrices()

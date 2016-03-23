@@ -1,17 +1,15 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using Microsoft.AspNet.Authorization;
 using Microsoft.AspNet.Mvc;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using WebApplication3.Models;
 using WebApplication3.Services;
 using Newtonsoft.Json.Serialization;
+using Microsoft.AspNet.Authorization;
 
 namespace WebApplication3.Controllers
 {
-	[Authorize(Roles = "administrator, upravnik")]
+	[Authorize(Roles = "administrator,upravnik")]
 	public class GasesController : Controller
 	{
 		private readonly ApplicationDbContext _context;
@@ -173,13 +171,13 @@ namespace WebApplication3.Controllers
 		public string GetUtilization(DateTime startDate, DateTime endDate, string executeBtn)
 		{
 			//filtering
-		//var selection = (from g in _context.Gases select new { g.ura_zacetnega_vpisa, g.ura_koncnega_vpisa }).ToArray();
+			//var selection = (from g in _context.Gases select new { g.ura_zacetnega_vpisa, g.ura_koncnega_vpisa }).ToArray();
 			if (DateTime.Compare(startDate, new DateTime(2013, 05, 07)) < 0)
 			{
 				startDate = new DateTime(2013, 05, 07);
 				endDate = DateTime.Now;
 			}
-			
+
 			var gases = from g in _context.Gases select g;
 			var result = "";
 

@@ -52,6 +52,11 @@ namespace WebApplication3
 				.AddViewLocalization()
 				.AddDataAnnotationsLocalization();
 
+			services.AddAuthorization(options =>
+			{
+				options.AddPolicy("HighLevelRole", policy => policy.RequireRole("administrator", "upravnik"));
+			});
+
 			services.AddTransient<GasContextSeedData>();
 			//services.AddScoped<IGasRepository, GasRepository>();
 
@@ -128,7 +133,7 @@ namespace WebApplication3
 					template: "{controller=Home}/{action=Index}/{id?}");
 			});
 
-			//await seeder.EnsureSeedDataAsync();
+			await seeder.EnsureSeedDataAsync();
 		}
 
 		// Entry point for the application.
