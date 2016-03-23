@@ -11,7 +11,7 @@ using Newtonsoft.Json.Serialization;
 
 namespace WebApplication3.Controllers
 {
-	[Authorize]
+	[Authorize(Roles = "administrator, upravnik")]
 	public class GasesController : Controller
 	{
 		private readonly ApplicationDbContext _context;
