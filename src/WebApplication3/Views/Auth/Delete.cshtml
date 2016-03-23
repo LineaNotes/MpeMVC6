@@ -1,4 +1,4 @@
-@model WebApplication3.Models.GasPrice
+@model WebApplication3.Models.ApplicationUser
 
 @{
 	ViewData["Title"] = "Izbris";
@@ -6,23 +6,17 @@
 
 <article class="row body-content">
 	<div class="col-sm-offset-3 col-sm-6">
-		<h3>Izbris vnosa cene</h3>
+		<h3>Izbris uporabnika</h3>
 
 		<div>
 			<h4>Si prepri&#269;an da &#382;eli&#353; izbrisati?</h4>
 			<hr/>
 			<dl class="dl-horizontal">
 				<dt>
-					@Html.DisplayNameFor(model => model.GDate)
+					@Html.DisplayNameFor(model => model.Email)
 				</dt>
 				<dd>
-					@Html.DisplayFor(model => model.GDate)
-				</dd>
-				<dt>
-					@Html.DisplayNameFor(model => model.GPrice)
-				</dt>
-				<dd>
-					@Html.DisplayFor(model => model.GPrice)
+					@Html.DisplayFor(model => model.Email)
 				</dd>
 			</dl>
 

@@ -1,27 +1,28 @@
-@model WebApplication3.Models.GasPrice
+@model WebApplication3.Models.ApplicationUser
 
 @{
 	ViewData["Title"] = "Podrobno";
 }
+
 <article class="row body-content">
 	<div class="col-md-offset-3 col-md-6">
 		<h2>Podrobno</h2>
 
 		<div>
-			<h4>Cena plina</h4>
+			<h4>Uporabnik</h4>
 			<hr />
 			<dl class="dl-horizontal">
 				<dt>
-					@Html.DisplayNameFor(model => model.GDate)
+					@Html.DisplayNameFor(model => model.Email)
 				</dt>
 				<dd>
-					@Html.DisplayFor(model => model.GDate)
+					@Html.DisplayFor(model => model.Email)
 				</dd>
 				<dt>
-					@Html.DisplayNameFor(model => model.GPrice)
+					@Html.DisplayNameFor(model => model.Roles)
 				</dt>
 				<dd>
-					@Html.DisplayFor(model => model.GPrice)
+					@Html.DisplayFor(model => model.Roles)
 				</dd>
 			</dl>
 		</div>
