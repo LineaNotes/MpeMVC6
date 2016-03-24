@@ -1,7 +1,11 @@
 using Microsoft.AspNet.Authorization;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Mvc;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Security.Claims;
+using System.Threading.Tasks;
 using WebApplication3.Models;
 
 namespace WebApplication3.Controllers
@@ -10,10 +14,15 @@ namespace WebApplication3.Controllers
 	public class AuthController : Controller
 	{
 		private ApplicationDbContext _context;
+		private UserManager<ApplicationUser> _userManager;
+		private RoleManager<IdentityRole> _roleManager;
 
-		public AuthController(ApplicationDbContext context)
+		public AuthController(ApplicationDbContext context, UserManager<ApplicationUser> userManager,
+			RoleManager<IdentityRole> roleManager)
 		{
 			_context = context;
+			_userManager = userManager;
+			_roleManager = roleManager;
 		}
 
 		// GET: Auth/Index/
@@ -24,7 +33,7 @@ namespace WebApplication3.Controllers
 		}
 
 		// GET: Auth/Details/5
-		public IActionResult Details(string id)
+		public async Task<IActionResult> Details(string id)
 		{
 			if (id == null)
 			{
@@ -37,7 +46,20 @@ namespace WebApplication3.Controllers
 				return HttpNotFound();
 			}
 
-			return View(user);
+			var model = new UserRoleViewModel();
+
+			var roles = await _userManager.GetRolesAsync(user);
+			var rolesCollection = new Collection<IdentityRole>();
+
+			foreach (var item in roles)
+			{
+				var role = await _roleManager.FindByNameAsync(item);
+				rolesCollection.Add(role);
+			}
+
+			model = new UserRoleViewModel { User = user, Roles = rolesCollection };
+
+			return View(model);
 		}
 
 		// GET: Auth/Edit/5

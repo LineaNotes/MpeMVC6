@@ -1,4 +1,4 @@
-@model WebApplication3.Models.ApplicationUser
+@model WebApplication3.Models.UserRoleViewModel
 
 @{
 	ViewData["Title"] = "Podrobno";
@@ -13,10 +13,10 @@
 			<hr />
 			<dl class="dl-horizontal">
 				<dt>
-					@Html.DisplayNameFor(model => model.Email)
+					@Html.DisplayNameFor(model => model.User.Email)
 				</dt>
 				<dd>
-					@Html.DisplayFor(model => model.Email)
+					@Html.DisplayFor(model => model.User.Email)
 				</dd>
 				<dt>
 					@Html.DisplayNameFor(model => model.Roles)
@@ -27,7 +27,7 @@
 			</dl>
 		</div>
 		<p>
-			<a asp-action="Edit" asp-route-id="@Model.Id">Uredi</a> |
+			<a asp-controller="Auth" asp-action="Edit" asp-route-id="@Model.User.Id">Uredi</a> |
 			<a asp-action="Index">Nazaj na seznam</a>
 		</p>
 	</div>
