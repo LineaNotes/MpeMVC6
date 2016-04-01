@@ -49,14 +49,15 @@ namespace WebApplication3.Controllers
 			var model = new UserRoleViewModel();
 
 			var roles = await _userManager.GetRolesAsync(user);
-			var rolesCollection = new Collection<IdentityRole>();
+			var rolesCollection = new IdentityRole[roles.Count];
 
+			int i = 0;
 			foreach (var item in roles)
 			{
 				var role = await _roleManager.FindByNameAsync(item);
-				rolesCollection.Add(role);
+				rolesCollection[i] = role;
+				i++;
 			}
-
 			model = new UserRoleViewModel { User = user, Roles = rolesCollection };
 
 			return View(model);

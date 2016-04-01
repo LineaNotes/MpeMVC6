@@ -12,6 +12,6 @@ namespace WebApplication3.Models
 	{
 		public ApplicationUser User { get; set; }
 
-		public Collection<IdentityRole> Roles { get; set; }
+		public IdentityRole[] Roles { get; set; }
 	}
 }
