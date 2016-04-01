@@ -1,46 +1,49 @@
 ﻿@{
-	ViewData["Title"] = "Grafi";
+  ViewData["Title"] = "Grafi";
 }
 
 <article id="contain" class="row body-content article-content"></article>
 
 <article class="row body-content article-content">
-	<div class="col-sm-offset-2 col-sm-2">
-		<h3>Graf uporabe</h3>
+  <div class="col-sm-offset-2 col-sm-2">
+    <h3>Graf uporabe</h3>
 
-		<form  asp-controller="Gases" asp-action="Graphs" class="form-horizontal body-content" method="post" role="form">
-			<div class="form-group form-inline">
-				<label for="startDate" class="control-label">Od</label>
-				<input type="date" id="startDate" name="StartDate" placeholder="dd.mm.llll" class="form-control" required>
-			</div>
-			<div class="form-group form-inline">
-				<label for="endDate" class="control-label">Do</label>
-				<input type="date" id="endDate" name="EndDate" placeholder="dd.mm.llll" class="form-control">
-			</div>
-			<div class="form-group">
-				<input name="executeBtn" type="submit" value="Poizvedi" class="btn btn-default"/>
-			</div>
-			@{
-				if (ViewBag.Message != null)
-				{
-					<div class="form-group text-danger">
-						<span>@ViewBag.Message</span>
-					</div>
-				} }
-		</form>
-		<div class="form-group">
-			<button onclick="uniqqNam3()" value="Osvezi" class="btn btn-default" />
-		</div>
-	</div>
-	
-	<div id="contain1" class="col-sm-8">
+    <form asp-controller="Gases" asp-action="Graphs" data_ajax="true" data-ajax-method="get" data_ajax_mode="replace" data_ajax_update="#contain1" class="form-horizontal body-content" role="form">
+      <div class="form-group form-inline">
+        <label for="startDate" class="control-label">Od</label>
+        <input type="date" id="startDate" name="StartDate" placeholder="dd.mm.llll" class="form-control" required>
+      </div>
+      <div class="form-group form-inline">
+        <label for="endDate" class="control-label">Do</label>
+        <input type="date" id="endDate" name="EndDate" placeholder="dd.mm.llll" class="form-control">
+      </div>
+      <div class="form-group">
+        <input name="executeBtn" type="submit" value="Poizvedi" class="btn btn-default" />
+      </div>
+      @{
+        if (ViewBag.Message != null)
+        {
+          <div class="form-group text-danger">
+            <span>@ViewBag.Message</span>
+          </div>
+        } }
+    </form>
+  </div>
 
-	</div>
+  <div id="contain1" class="col-sm-8">
+    @section ScriptsPartial {
+      @{
+        await Html.RenderPartialAsync("_GasUtilization");
+      }
+    }
+  </div>
 </article>
 
-<script src="~/lib/jquery/dist/jquery.js"></script>
-<script src="~/lib/highstock/highstock.js"></script>
-<script src="~/lib/highstock/modules/exporting.js"></script>
-<script src="~/js/graphProduction.js"></script>
-<script src="~/js/graphUtilization.js"></script>
+@section Scripts {
+  <script src="~/lib/jquery-ajax-unobtrusive/jquery.unobtrusive-ajax.js"></script>
+  <script src="~/lib/highstock/highstock.js"></script>
+  <script src="~/lib/highstock/modules/exporting.js"></script>
+  <script src="~/js/graphProduction.js"></script>
+  @*<script src="~/js/graphUtilization.js"></script>*@
+}
 
