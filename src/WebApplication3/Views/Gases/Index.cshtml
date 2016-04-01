@@ -7,7 +7,16 @@
 <article class="row body-content">
   <div class="col-sm-3">
     <h3>Tabela vnosov</h3>
-    <form asp-controller="Gases" asp-action="Index" data_ajax="true" data-ajax-method="get" data_ajax_mode="replace" data_ajax_update="#gasTableContainer" class="form-horizontal body-content" role="form">
+    @using (Html.BeginForm("GasResultTable", "Gases", FormMethod.Get, new
+    {
+      id = "searchBtn",
+      data_ajax = "true",
+      data_ajax_method = "GET",
+      data_ajax_mode = "replace",
+      data_ajax_update = "#gasTableContainer",
+      @class = "form-horizontal body-content"
+    }))
+    {
       <div class="form-group form-inline">
         <label for="startDate" class="control-label">Od</label>
         <input type="date" id="startDate" name="StartDate" placeholder="dd.mm.llll" class="form-control" required>
@@ -19,7 +28,7 @@
       <div class="form-group">
         <input name="searchBtn" type="submit" value="I&#353;&#269;i" class="btn btn-default" />
       </div>
-    </form>
+    }
   </div>
 
   <div id="gasTableContainer" class="article-content col-sm-9">

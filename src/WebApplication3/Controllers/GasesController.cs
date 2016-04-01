@@ -23,6 +23,19 @@ namespace WebApplication3.Controllers
     public IActionResult Index(DateTime startDate, DateTime endDate, string searchBtn)
     {
       var gases = from g in _context.Gases select g;
+
+      gases = startDate > endDate
+        ? gases.Where(g => g.datum == startDate)
+        : gases.Where(g => g.datum >= startDate && g.datum <= endDate);
+
+
+      return View(gases);
+    }
+
+    // GET: PARTIAL VIEW - Gases/_GasResultTable 
+    public IActionResult GasResultTable(DateTime startDate, DateTime endDate, string searchBtn)
+    {
+      var gases = from g in _context.Gases select g;
       var result = "";
 
       gases = startDate > endDate
@@ -39,13 +52,7 @@ namespace WebApplication3.Controllers
       var sum = gases.AsEnumerable().Sum(p => p.proizvedena_kolicina);
       ViewBag.Summa = sum;
 
-      return View(gases);
-    }
-
-    // GET: PARTIAL VIEW - Gases/_GasResultTable 
-    public IActionResult GasResultTable()
-    {
-      return PartialView("_GasResultTable");
+      return PartialView("_GasResultTable", gases);
     }
 
     // GET: Gases/Details/5
