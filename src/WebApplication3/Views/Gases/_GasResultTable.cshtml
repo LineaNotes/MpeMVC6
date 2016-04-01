@@ -1,0 +1,48 @@
+﻿@model IEnumerable<WebApplication3.Models.Gas>
+@{
+  if (ViewBag.Message != null)
+  {
+    <div class="form-group text-danger">
+      <span>@ViewBag.Message</span>
+    </div>
+  }
+  <div class="form-group">
+    <label class="control-label">SUMMA</label>
+    <span>@ViewBag.Summa</span>
+  </div>
+}
+
+<table class="table table-responsive table-striped">
+  <tr>
+    <th>
+      @Html.DisplayNameFor(model => model.datum)
+    </th>
+    <th>
+      @Html.DisplayNameFor(model => model.proizvedena_kolicina)
+    </th>
+    <th>
+      @Html.DisplayNameFor(model => model.ura_zacetnega_vpisa)
+    </th>
+    <th>
+      @Html.DisplayNameFor(model => model.ura_koncnega_vpisa)
+    </th>
+  </tr>
+
+  @foreach (var item in Model)
+  {
+    <tr>
+      <td>
+        @Html.DisplayFor(modelItem => item.datum)
+      </td>
+      <td>
+        @Html.DisplayFor(modelItem => item.proizvedena_kolicina)
+      </td>
+      <td>
+        @Html.DisplayFor(modelItem => item.ura_zacetnega_vpisa)
+      </td>
+      <td>
+        @Html.DisplayFor(modelItem => item.ura_koncnega_vpisa)
+      </td>
+    </tr>
+  }
+</table>
