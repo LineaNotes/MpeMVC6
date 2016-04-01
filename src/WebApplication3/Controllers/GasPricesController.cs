@@ -39,7 +39,7 @@ namespace WebApplication3.Controllers
 		// GET: GasPrices/Create
 		public IActionResult Create()
 		{
-			return View();
+			return View(new GasPrice());
 		}
 
 		// POST: GasPrices/Create
