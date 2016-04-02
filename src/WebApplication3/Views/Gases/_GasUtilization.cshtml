@@ -1,3 +1,9 @@
-﻿<div id="contain1" class="col-sm-8">
+﻿@{
+  if (ViewBag.Message != null)
+  {
+    @ViewBag.Message
+  }
+}
+<span id="contain2">
   <script src="~/js/graphutilization.js"></script>
-</div>
+</span>

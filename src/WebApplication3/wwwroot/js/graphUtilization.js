@@ -9,7 +9,7 @@
 					plotBorderWidth: null,
 					plotShadow: false,
 					type: 'pie',
-					renderTo: 'contain1'
+					renderTo: 'contain2'
 				},
 				title: {
 					text: 'Izkoristek za izbrano obdobje'

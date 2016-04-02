@@ -13,6 +13,9 @@ namespace WebApplication3.Controllers
   public class GasesController : Controller
   {
     private readonly ApplicationDbContext _context;
+    public static DateTime sd;
+    public static DateTime se;
+
 
     public GasesController(ApplicationDbContext context)
     {
@@ -157,6 +160,16 @@ namespace WebApplication3.Controllers
       return View();
     }
 
+
+    // GET: PARTIAL VIEW - Gases/_GasUtilization
+    public IActionResult GasUtilization(DateTime startDate, DateTime endDate, string executeBtn)
+    {
+      sd = startDate;
+      se = endDate;
+      return PartialView("_GasUtilization");
+    }
+
+
     public string GetAllGasesDateOutput()
     {
       var selection = (from g in _context.Gases select new { g.datum, g.proizvedena_kolicina }).ToArray();
@@ -183,13 +196,18 @@ namespace WebApplication3.Controllers
 
     public string GetUtilization(DateTime startDate, DateTime endDate, string executeBtn)
     {
+      if (DateTime.Compare(sd, new DateTime(2013, 05, 06)) > 0)
+      {
+        startDate = sd;
+        endDate = se;
+      }
       //filtering
       //var selection = (from g in _context.Gases select new { g.ura_zacetnega_vpisa, g.ura_koncnega_vpisa }).ToArray();
-      if (DateTime.Compare(startDate, new DateTime(2013, 05, 07)) < 0)
-      {
-        startDate = new DateTime(2013, 05, 07);
-        endDate = DateTime.Now;
-      }
+      //if (DateTime.Compare(startDate, new DateTime(2013, 05, 07)) < 0)
+      //{
+      //  startDate = new DateTime(2013, 05, 07);
+      //  endDate = DateTime.Now;
+      //}
 
       var gases = from g in _context.Gases select g;
       var result = "";
